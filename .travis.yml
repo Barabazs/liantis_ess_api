@@ -1,6 +1,4 @@
 language: python
-python:
-- 3.7
 install: pip install -U tox-travis
 script: tox
 deploy:
@@ -12,3 +10,5 @@ deploy:
   on:
     tags: true
     # repo: dotEsuS/liantis_ess_api
+      python: 3.7
+      dist: xenial
