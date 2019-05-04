@@ -13,7 +13,7 @@ requirements = ['python-openam', 'requests', 'demjson']
 
 setuptools.setup(
     name='liantis_ess_api',
-    version='0.1.0',
+    version='0.1.1',
     author='dotEsuS',
     author_email='',
     description='Unofficial API wrapper for Liantis ESS',
