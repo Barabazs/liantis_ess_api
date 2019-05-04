@@ -8,7 +8,8 @@ import openam
 import requests
 
 START_URL = 'https://ess.liantis.be/'
-MIJNPRESTATIES_URL = 'https://ess.liantis.be/MijnPrestaties/'
+MIJNPRESTATIES_URL = START_URL + 'MijnPrestaties/'
+MIJNKALENDER_URL = START_URL + 'mijnkalender/'
 
 
 class MijnPrestaties:
@@ -84,3 +85,7 @@ class MijnPrestaties:
         # Convert the javascript object to Python object
         return demjson.decode(is_location_mandatory.text)
 
+
+class MijnKalender:
+    def __init__(self):
+        self.session = requests.Session()
