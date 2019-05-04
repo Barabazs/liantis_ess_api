@@ -1,9 +1,6 @@
 language: python
-matrix:
-  include:
-    - name: "Python 3.7.1 on Xenial Linux"
-      python: 3.7           # this works for Linux but is ignored on macOS or Windows
-      dist: xenial          # required for Python >= 3.7
+python:
+- 3.6
 install: pip3 install -U tox-travis
 script: tox
 deploy:
@@ -15,4 +12,4 @@ deploy:
   on:
     tags: true
     # repo: dotEsuS/liantis_ess_api
-      python: 3.7
+      python: 3.6
