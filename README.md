@@ -1,4 +1,4 @@
-python-liantis-ess-api
+liantis-ess-api
 ========
 
 Unofficial API wrapper for [Liantis ESS](https://www.liantis.be/myliantis/).
