@@ -12,5 +12,3 @@ deploy:
   on:
     tags: true
     # repo: dotEsuS/liantis_ess_api
-    python: 3.7
-    dist: xenial
