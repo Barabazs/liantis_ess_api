@@ -12,4 +12,4 @@ deploy:
   on:
     tags: true
     # repo: dotEsuS/liantis_ess_api
-      python: 3.6
+    python: 3.6
