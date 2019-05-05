@@ -1,0 +1,14 @@
+    #!/bin/bash
+    
+    set -e
+    
+    function tag.the.release {
+        git tag -a $REL_TAG_VERSION -m "Travis CI generated tag"
+        git push origin $REL_TAG_VERSION
+    }
+    
+    if [ -z "$REL_TAG_VERSION" ];
+    then
+      echo "no version to set - Done!"
+      exit 0
+    fi
