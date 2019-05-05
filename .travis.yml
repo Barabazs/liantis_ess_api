@@ -33,7 +33,7 @@ os:
   # - osx
   #- windows
 
-install: pip install -U tox-travis -r requirements.txt
+install: pip install -U tox-travis
 script: tox
 
     # If all tests pass, go on to the build stage
@@ -60,11 +60,11 @@ script: tox
 
         - provider: pypi
           skip_cleanup: true
-	  user: dotEsuS
-	  password:
-	    secure: ZMtESHKR2Jc1Roql7nNxtHmPEURRbyI3xAqGv8SMBsC7Rj/tzEDUYmsT4XHUft8PghSD9D3HUbO/46RVqR8Hr78KS6nyO54+RcvVjwUchuGnUiAPBOdi92RFTmbNaPCXduKr/2LZTby6XX99xqJX8cEpx8jzvfqCz6ujEVN1Wh2JoyxJ3o0AwlOrIuZbNQUuu7IjkEPvev8EMEz3QwUv2yx3smMTxHdP2bN1+ImWw8qjaSTYPZvT2at/8wlJk4+pbjr5/PHDMzbaBN6QnY6a5pIwFbdwiAYQ37uVW1SZr40z/x7hk28TM6G0CfPmDl60zk8F8j1d58w6rJ1EZxAdshlgqobmIUMFyT/dTMNM0cZlw5Rvw22peywHaiINo8jO6ptT0SSnd2rzFWuUUoytoQFh+MXigm4gDXtrbWMs5ThnSzIz6B7NiAUccDf3lv1KEuWa7yOooIolF9IHeM8qYiqVzHKlwH7J3U85L5MJCI29YKGCneI8BPDkPuD/1DYXFteoTtrTFctTDQSrM710uhVWnP4Kb0PaEXk9/Lee4GM5ZiZIc2kXA3DeDE4cWhXLjbS8uAcBlsFvMpGfczc2/U9P2pRjHkxwOcF4ekY8JgHKpofK5Ctid4GQV3qwLW4/0V+9B8Qv7r36VI7OvEiVUPcPMJ0m8UCE+ilY47e+YF0=
-	  on:
-	    tags: true
+          user: dotEsuS
+          password:
+            secure: ZMtESHKR2Jc1Roql7nNxtHmPEURRbyI3xAqGv8SMBsC7Rj/tzEDUYmsT4XHUft8PghSD9D3HUbO/46RVqR8Hr78KS6nyO54+RcvVjwUchuGnUiAPBOdi92RFTmbNaPCXduKr/2LZTby6XX99xqJX8cEpx8jzvfqCz6ujEVN1Wh2JoyxJ3o0AwlOrIuZbNQUuu7IjkEPvev8EMEz3QwUv2yx3smMTxHdP2bN1+ImWw8qjaSTYPZvT2at/8wlJk4+pbjr5/PHDMzbaBN6QnY6a5pIwFbdwiAYQ37uVW1SZr40z/x7hk28TM6G0CfPmDl60zk8F8j1d58w6rJ1EZxAdshlgqobmIUMFyT/dTMNM0cZlw5Rvw22peywHaiINo8jO6ptT0SSnd2rzFWuUUoytoQFh+MXigm4gDXtrbWMs5ThnSzIz6B7NiAUccDf3lv1KEuWa7yOooIolF9IHeM8qYiqVzHKlwH7J3U85L5MJCI29YKGCneI8BPDkPuD/1DYXFteoTtrTFctTDQSrM710uhVWnP4Kb0PaEXk9/Lee4GM5ZiZIc2kXA3DeDE4cWhXLjbS8uAcBlsFvMpGfczc2/U9P2pRjHkxwOcF4ekY8JgHKpofK5Ctid4GQV3qwLW4/0V+9B8Qv7r36VI7OvEiVUPcPMJ0m8UCE+ilY47e+YF0=
+          on:
+            tags: true
             # branch: master # already filtered out in the "branches" section
             repo: "$REPO_NAME"
 
