@@ -8,7 +8,6 @@ env:
     # deploy stage config
     - REPO_NAME="dotEsuS/liantis_ess_api" # releases will only work under this name
 
-
 # this line routes the builds to Ubuntu 16.04
 dist: xenial
 
