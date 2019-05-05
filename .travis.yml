@@ -33,8 +33,8 @@ install: pip install -U tox-travis
 script: tox
 
 after_success:
-- chmod +x ./travis/set_tags.sh
-- sh ./travis/set_tags.sh
+- chmod +x set_tags.sh
+- sh set_tags.sh
 
 
 deploy:
