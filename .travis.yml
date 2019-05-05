@@ -33,7 +33,7 @@ os:
   # - osx
   #- windows
 
-install: pip install -U tox-travis
+install: pip install -U tox-travis -r requirements.txt
 script: tox
 
     # If all tests pass, go on to the build stage
