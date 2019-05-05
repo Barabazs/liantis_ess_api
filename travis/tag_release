@@ -1,14 +1,38 @@
-    #!/bin/bash
-    
-    set -e
-    
-    function tag.the.release {
-        git tag -a $REL_TAG_VERSION -m "Travis CI generated tag"
-        git push origin $REL_TAG_VERSION
-    }
-    
-    if [ -z "$REL_TAG_VERSION" ];
-    then
-      echo "no version to set - Done!"
-      exit 0
-    fi
+#!/bin/bash
+
+set -e
+
+function tag.the.release {
+    git tag -a $REL_TAG_VERSION -m "Travis CI generated tag"
+    git push origin $REL_TAG_VERSION
+}
+
+if [ -z "$REL_TAG_VERSION" ];
+then
+  echo "no version to set - Done!"
+  exit 0
+fi
+
+declare -A tags=()
+for line in $(git ls-remote --tags ${REPO_REMOTE} | awk '{print $2}'  | grep -v '{}' | awk -F"/" '{print $3}' | sort -Vr)
+do
+  tags[$line]=$line
+done
+echo "tags=${tags[@]}"
+echo "tags length=${#tags[@]}"
+
+if [ ${#tags[@]} -gt 0 ];
+then
+  key=${REL_TAG_VERSION}
+  if [[ ${tags[$key]+abc} == 'abc' ]];
+  then
+    echo "tag ${REL_TAG_VERSION} already exists"
+  else
+    tag.the.release
+  fi
+else
+  echo "no tags found - creating our first one!"
+  tag.the.release
+fi
+
+echo "Done!"
