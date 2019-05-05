@@ -10,6 +10,7 @@ deploy:
   file_glob: true
   file: $TRAVIS_BUILD_DIR/*
   skip_cleanup: true
+  draft: true
   on:
     repo: dotEsuS/liantis_ess_api
 deploy:
