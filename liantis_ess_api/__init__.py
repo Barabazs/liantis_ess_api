@@ -4,4 +4,3 @@
 
 __author__ = """dotEsuS"""
 __email__ = ''
-__version__ = '0.1.0'
