@@ -32,11 +32,6 @@ os:
 install: pip install -U tox-travis
 script: tox
 
-after_success:
-- chmod +x set_tags.sh
-- sh set_tags.sh
-
-
 deploy:
   provider: releases
   skip_cleanup: true
