@@ -17,6 +17,7 @@ deploy:
   draft: true
   on:
     repo: dotEsuS/liantis_ess_api
+    tags: false
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
