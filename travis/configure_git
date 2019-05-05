@@ -1,7 +1,0 @@
-    #!/bin/bash
-    
-    set -e
-    
-    git config --local user.name "CI-CD"
-    git config --local user.email "info@us.com"
-    git config --local --add push.default current
