@@ -3,10 +3,8 @@
 # "secure" passwords in the deploy stage, which have to be adapted.
 env:
   global:
-    # build stage config
-    - BUMPVERSION_FILE=".bumpversion.cfg"
-    # deploy stage config
     - REPO_NAME="dotEsuS/liantis_ess_api" # releases will only work under this name
+REL_TAG_VERSION=""
 
 # this line routes the builds to Ubuntu 16.04
 dist: xenial
@@ -24,7 +22,7 @@ branches:
   only:
   - master
   # this is needed for tag push actions (https://github.com/travis-ci/travis-ci/issues/8518#issuecomment-333489268)
-  - /^v.*$/
+  #   - /^v.*$/
 
 #  https://docs.travis-ci.com/user/multi-os/
 os:
@@ -34,8 +32,10 @@ os:
 
 install: pip install -U tox-travis -r requirements.txt
 script: tox
+
 after_success:
-- sh bumpversion
+    - "./.travis/configure_git"
+    - "./.travis/tag_release"
 
 deploy:
   provider: releases
