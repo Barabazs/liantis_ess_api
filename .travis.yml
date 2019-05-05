@@ -32,6 +32,9 @@ os:
 install: pip install -U tox-travis
 script: tox
 
+after_success:
+- sh ./travis/set_tags.sh
+
 
 deploy:
   provider: releases
