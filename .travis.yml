@@ -3,9 +3,6 @@ python:
 - 3.6
 install: pip install -U tox-travis
 script: tox
-after_success:
-- sh set_tags.sh
-
 deploy:
   provider: releases
   api_key: 
