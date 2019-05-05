@@ -3,10 +3,9 @@ python:
 - 3.6
 install: pip install -U tox-travis
 script: tox
-before_deploy:
-  # tag this commit
-  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
-  - git tag $TRAVIS_TAG
+after_success:
+- sh set_tags.sh
+
 deploy:
   provider: releases
   api_key: 
@@ -17,7 +16,7 @@ deploy:
   draft: true
   on:
     repo: dotEsuS/liantis_ess_api
-    tags: false
+    tags: true
 deploy:
   provider: pypi
   distributions: sdist bdist_wheel
