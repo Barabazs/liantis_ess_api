@@ -1,0 +1,5 @@
+snakeviz
+bump2version
+setuptools
+wheel
+twine
