@@ -34,47 +34,29 @@ os:
 
 install: pip install -U tox-travis -r requirements.txt
 script: tox
+after_success:
+- sh bumpversion
 
-# here we define the stages. stage ordering will come later
-jobs:
-  include:
-    # Perform all needed tests to ensure repo quality. All scripts
-    # in a stage are done in parallel. Stages are done sequentially.
-
-    # If all tests pass, go on to the build stage
-    - stage: build
-      script: python setup.py sdist bdist_wheel
-      name: "Build Package"
-
-    # If building was successful, deploy to various platforms
-    - stage: deploy
-      before_script: python setup.py sdist bdist_wheel # since we are deploying in a proper stage, the repo starts from scratch and needs to rebuild.
-      script: echo ""
-      name: "Deploy to GitHub Releases and PyPI"
-      deploy:
-        - provider: releases
-          skip_cleanup: true
-          name: "$TRAVIS_COMMIT_MESSAGE"
-          api_key:
-            secure: hzOXIlNAWbUSDu8/L5+g/+bxvsPb5ijPYoqbFjfUdMUpidnUffWCa69OE1m2wcpPgyLZaFlWs/Guw3itd7su8LnNE9GS2Hum4a38w2MpNTHtj9GVkekaMsoBNprHd+brTOtBbztebCn00ulpTytKWTR+ukpxdEcBaOP0KnDGnexppMPJpFRqFst16kndoWzQTX/eu8kSuloFdd2+E/mgUBpsjgpx+54TmSoRe00HiWxF399LShrXqy7u3ZghoYUY8Z2iZa/qk0+xp2IJXTAYaFsWt7wHz9vtLe1NZHPOD0WgtnWnvh4mJ9VEXvbhAuc/XK3B0G/2J3J7tpMGERmo4x13HVcbEb8BzFOQgMuCm+6jv1EnT5+wyHMAU9vM7sFXMlibECv6tVXPtPQYjVXBSGtDFLZc1ou4tH4bruH3awVRD2z1awVL9SYJcLSySUAMHt0yW9cFJkq7lLQaSTBL4dqjaso9P3s25TELras3Td4R4ELZY2MS/U3irngxRMM3szv4RXzpkx1U9AhBfcwmMa18kDVh9ROKSkACSfRaRhDxRSYcvczeDT1BczF5jMtagPjlhyhaoU0+zFdfh0fYoauWQCt1yxW92Gv1BSTiSpp0SmwVFz6Ydvo++zIDtPFAPoAcppQtV9i+zUQjP1+Yz54Ki+sB9dyj5axQ8LYBWvg=
-          file_glob: true
-          file: $TRAVIS_BUILD_DIR/*
-          on:
-            tags: true
-            # branch: master # already filtered out in the "branches" section
-            repo: "$REPO_NAME"
-        - provider: pypi
-          skip_cleanup: true
-          user: dotEsuS
-          password:
-            secure: ZMtESHKR2Jc1Roql7nNxtHmPEURRbyI3xAqGv8SMBsC7Rj/tzEDUYmsT4XHUft8PghSD9D3HUbO/46RVqR8Hr78KS6nyO54+RcvVjwUchuGnUiAPBOdi92RFTmbNaPCXduKr/2LZTby6XX99xqJX8cEpx8jzvfqCz6ujEVN1Wh2JoyxJ3o0AwlOrIuZbNQUuu7IjkEPvev8EMEz3QwUv2yx3smMTxHdP2bN1+ImWw8qjaSTYPZvT2at/8wlJk4+pbjr5/PHDMzbaBN6QnY6a5pIwFbdwiAYQ37uVW1SZr40z/x7hk28TM6G0CfPmDl60zk8F8j1d58w6rJ1EZxAdshlgqobmIUMFyT/dTMNM0cZlw5Rvw22peywHaiINo8jO6ptT0SSnd2rzFWuUUoytoQFh+MXigm4gDXtrbWMs5ThnSzIz6B7NiAUccDf3lv1KEuWa7yOooIolF9IHeM8qYiqVzHKlwH7J3U85L5MJCI29YKGCneI8BPDkPuD/1DYXFteoTtrTFctTDQSrM710uhVWnP4Kb0PaEXk9/Lee4GM5ZiZIc2kXA3DeDE4cWhXLjbS8uAcBlsFvMpGfczc2/U9P2pRjHkxwOcF4ekY8JgHKpofK5Ctid4GQV3qwLW4/0V+9B8Qv7r36VI7OvEiVUPcPMJ0m8UCE+ilY47e+YF0=
-          on:
-            tags: true
-            # branch: master # already filtered out in the "branches" section
-            repo: "$REPO_NAME"
+deploy:
+  provider: releases
+  skip_cleanup: true
+  name: "$TRAVIS_COMMIT_MESSAGE"
+  api_key: 
+    secure: hzOXIlNAWbUSDu8/L5+g/+bxvsPb5ijPYoqbFjfUdMUpidnUffWCa69OE1m2wcpPgyLZaFlWs/Guw3itd7su8LnNE9GS2Hum4a38w2MpNTHtj9GVkekaMsoBNprHd+brTOtBbztebCn00ulpTytKWTR+ukpxdEcBaOP0KnDGnexppMPJpFRqFst16kndoWzQTX/eu8kSuloFdd2+E/mgUBpsjgpx+54TmSoRe00HiWxF399LShrXqy7u3ZghoYUY8Z2iZa/qk0+xp2IJXTAYaFsWt7wHz9vtLe1NZHPOD0WgtnWnvh4mJ9VEXvbhAuc/XK3B0G/2J3J7tpMGERmo4x13HVcbEb8BzFOQgMuCm+6jv1EnT5+wyHMAU9vM7sFXMlibECv6tVXPtPQYjVXBSGtDFLZc1ou4tH4bruH3awVRD2z1awVL9SYJcLSySUAMHt0yW9cFJkq7lLQaSTBL4dqjaso9P3s25TELras3Td4R4ELZY2MS/U3irngxRMM3szv4RXzpkx1U9AhBfcwmMa18kDVh9ROKSkACSfRaRhDxRSYcvczeDT1BczF5jMtagPjlhyhaoU0+zFdfh0fYoauWQCt1yxW92Gv1BSTiSpp0SmwVFz6Ydvo++zIDtPFAPoAcppQtV9i+zUQjP1+Yz54Ki+sB9dyj5axQ8LYBWvg=
+  file_glob: true
+  file: $TRAVIS_BUILD_DIR/*
+  on:
+    tags: true
+    # branch: master # already filtered out in the "branches" section
+    repo: "$REPO_NAME"
+deploy:
+  provider: pypi
+  user: dotEsuS
+  password:
+    secure: ZMtESHKR2Jc1Roql7nNxtHmPEURRbyI3xAqGv8SMBsC7Rj/tzEDUYmsT4XHUft8PghSD9D3HUbO/46RVqR8Hr78KS6nyO54+RcvVjwUchuGnUiAPBOdi92RFTmbNaPCXduKr/2LZTby6XX99xqJX8cEpx8jzvfqCz6ujEVN1Wh2JoyxJ3o0AwlOrIuZbNQUuu7IjkEPvev8EMEz3QwUv2yx3smMTxHdP2bN1+ImWw8qjaSTYPZvT2at/8wlJk4+pbjr5/PHDMzbaBN6QnY6a5pIwFbdwiAYQ37uVW1SZr40z/x7hk28TM6G0CfPmDl60zk8F8j1d58w6rJ1EZxAdshlgqobmIUMFyT/dTMNM0cZlw5Rvw22peywHaiINo8jO6ptT0SSnd2rzFWuUUoytoQFh+MXigm4gDXtrbWMs5ThnSzIz6B7NiAUccDf3lv1KEuWa7yOooIolF9IHeM8qYiqVzHKlwH7J3U85L5MJCI29YKGCneI8BPDkPuD/1DYXFteoTtrTFctTDQSrM710uhVWnP4Kb0PaEXk9/Lee4GM5ZiZIc2kXA3DeDE4cWhXLjbS8uAcBlsFvMpGfczc2/U9P2pRjHkxwOcF4ekY8JgHKpofK5Ctid4GQV3qwLW4/0V+9B8Qv7r36VI7OvEiVUPcPMJ0m8UCE+ilY47e+YF0=
+  on:
+    tags: true
+    # branch: master # already filtered out in the "branches" section
+    repo: "$REPO_NAME"
 
 
-# Here you can specify the order for stages, or skip some
-stages:
-  - build
-  - deploy
