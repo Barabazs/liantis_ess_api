@@ -29,12 +29,9 @@ os:
   # - osx
   #- windows
 
-install: pip install -U tox-travis -r requirements.txt
+install: pip install -U tox-travis
 script: tox
 
-after_success:
-    - "./.travis/configure_git"
-    - "./.travis/tag_release"
 
 deploy:
   provider: releases
