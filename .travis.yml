@@ -3,6 +3,10 @@ python:
 - 3.6
 install: pip install -U tox-travis
 script: tox
+before_deploy:
+  # tag this commit
+  - export TRAVIS_TAG=${TRAVIS_TAG:-$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)}
+  - git tag $TRAVIS_TAG
 deploy:
   provider: releases
   api_key: 
