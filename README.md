@@ -23,3 +23,12 @@ my_user_id = y.get_employee_id()
 print(y.get_organisation_counter_settings(my_user_id))
 ```
  
+
+## Donation
+
+[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T51XKUJ)
+
+|Ethereum|Bitcoin|
+|:-:	|:-:	|
+|0x6b78d3deea258914C2f4e44054d22094107407e5|bc1qvvh8s3tt97cwy20mfdttpwqw0vgsrrceq8zkmw|
+|![eth](https://raw.githubusercontent.com/Barabazs/Barabazs/master/.github/eth.png)|![btc](https://raw.githubusercontent.com/Barabazs/Barabazs/master/.github/btc.png)|
